@@ -2,7 +2,7 @@ import random
 from faker import Faker
 from datetime import date
   
-fake = faker()
+fake = Faker()
 def generate_dim_track(conn,artists):
   tracks = []
   for i in range(1, 10001):
