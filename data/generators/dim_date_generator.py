@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, date
 
-def generate_dim_user(conn):
+def generate_dim_date(conn):
   
   dates = []
   start = date(2022, 1, 1)
