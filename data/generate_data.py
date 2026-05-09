@@ -33,7 +33,7 @@ def main():
         
         create_schemas(conn)
         generate_dim_date(conn)
-        users = generate_dim_user(conn)
+        users = generate_dim_user(conn,countries)
         artists = generate_dim_artist(conn)
         tracks = generate_dim_track(conn, artists)
         generate_fact_streams(conn, users, tracks)
