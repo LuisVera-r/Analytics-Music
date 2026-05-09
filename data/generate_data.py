@@ -1,5 +1,9 @@
-import duckdb
+import sys
 import os
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+import duckdb
 from generators.date_generator import generate_dim_date
 from generators.user_generator import generate_dim_user
 from generators.music_generator import generate_music_data
