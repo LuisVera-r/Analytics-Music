@@ -3,7 +3,7 @@ from faker import Faker
 from datetime import date, timedelta
 
 fake = Faker()
-def generate_dim_user(conn):
+def generate_dim_user(conn,countries):
   regions = ['CDMX', 'GDL', 'MTY', 'NYC', 'LAX', 'Miami',
            'Bogotá', 'Lima', 'Madrid', 'Buenos Aires','Liverpool','Manchester']
   
