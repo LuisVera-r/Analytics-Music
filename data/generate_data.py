@@ -4,10 +4,11 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import duckdb
-from generators.dim_date_generator import generate_dim_date
+from generators.dim_artist_generator import generate_dim_artist
+from generators.dim_date_generator import  generate_dim_date
 from generators.dim_user_generator import generate_dim_user
-from generators.dim_music_generator import generate_music_data
-from generators.dim_fact_generator import generate_fact_streams
+from generators.dim_track_generator import generate_dim_track
+from generators.fact_generator import generate_fact_streams
 
 def create_schemas(conn):
     
