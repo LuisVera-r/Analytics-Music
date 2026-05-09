@@ -1,6 +1,7 @@
 import random
 from faker import Faker
 
+fake = Faker()
 def generate_dim_artist(conn):
   genres = ['Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz',
           'Classical', 'Reggaeton', 'R&B', 'Latin', 'Metal','Indie']
