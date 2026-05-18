@@ -4,6 +4,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import duckdb
+import traceback
 from generators.dim_artist_generator import generate_dim_artist
 from generators.dim_date_generator import  generate_dim_date
 from generators.dim_user_generator import generate_dim_user
@@ -40,7 +41,7 @@ def main():
         print("="*40 + "\n DATA WAREHOUSE LISTO")
         
     except Exception as e:
-        print(f" ERROR CRÍTICO: {e}")
+        traceback.print_exc()
     finally:
         conn.close()
 
