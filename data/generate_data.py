@@ -16,7 +16,13 @@ def create_schemas(conn):
     tables = ['dim_date', 'dim_artist', 'dim_track', 'dim_user', 'fact_streams']
     print(" Creando tablas...")
     for table in tables:
-        path = f'sql/schema/{table}.sql'
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(
+        BASE_DIR,
+        'sql',
+        'schema',
+        f'{table}.sql'
+    )
         if os.path.exists(path):
             with open(path, 'r') as f:
                 conn.execute(f.read())
@@ -25,7 +31,13 @@ def create_schemas(conn):
 
 def main():
     
-    db_path = 'musicflow.duckdb'
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    db_path = os.path.join(
+    BASE_DIR,
+    'storage',
+    'musicflow.duckdb'
+    )
     conn = duckdb.connect(db_path)
     
     try:
