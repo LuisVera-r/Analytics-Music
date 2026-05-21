@@ -8,7 +8,8 @@ def generate_fact_streams(conn, users, tracks):
   batch = []
   limite_global = date(2025, 12, 31)
   
-  for i in range(1, 1_000_001):
+
+  for i in range(1, 250_000):
       user = random.choice(users)
       user_sk = user[0]
       valid_from = user[8]
