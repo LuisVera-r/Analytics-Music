@@ -1,6 +1,26 @@
 __pycache__/
 *.pyc
-.airflow/
 logs/
 storage/*.duckdb
 .env
+venv/
+# ==========================================
+# Apache Airflow
+# ==========================================
+
+airflow/airflow.db
+airflow/airflow.db-*
+
+airflow/logs/
+
+airflow/*.pid
+airflow/*.err
+airflow/standalone_admin_password.txt
+
+airflow/airflow.cfg
+airflow/webserver_config.py
+
+
+
+
+

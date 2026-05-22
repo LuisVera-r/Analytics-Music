@@ -1,9 +1,9 @@
 import sys
 import os
-
+from pathlib import Path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-import duckdb
+import duckdb 
 import traceback
 from generators.dim_artist_generator import generate_dim_artist
 from generators.dim_date_generator import  generate_dim_date
@@ -17,12 +17,12 @@ def create_schemas(conn):
     print(" Creando tablas...")
     for table in tables:
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(
-        BASE_DIR,
+        path = os.path.join(os.path.dirname(
+        BASE_DIR),
         'sql',
         'schema',
         f'{table}.sql'
-    )
+        )
         if os.path.exists(path):
             with open(path, 'r') as f:
                 conn.execute(f.read())
@@ -31,13 +31,10 @@ def create_schemas(conn):
 
 def main():
     
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    BASE_DIR = Path(__file__).resolve().parent.parent
 
-    db_path = os.path.join(
-    BASE_DIR,
-    'storage',
-    'musicflow.duckdb'
-    )
+    db_path = BASE_DIR/'storage'/'musicflow.duckdb'
+    
     conn = duckdb.connect(db_path)
     
     try:
