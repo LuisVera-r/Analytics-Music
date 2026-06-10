@@ -4,6 +4,7 @@ logs/
 storage/*.duckdb
 .env
 venv/
+
 # ==========================================
 # Apache Airflow
 # ==========================================
@@ -19,6 +20,12 @@ airflow/standalone_admin_password.txt
 
 airflow/airflow.cfg
 airflow/webserver_config.py
+
+#-----------DBT---------------
+
+target/
+dbt_packages/
+logs/
 
 
 

@@ -34,6 +34,7 @@ def main():
     BASE_DIR = Path(__file__).resolve().parent.parent
 
     db_path = BASE_DIR/'storage'/'musicflow.duckdb'
+    # db_path.parent.mkdir(parents=True, exist_ok=True)
     
     conn = duckdb.connect(db_path)
     

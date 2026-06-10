@@ -1,0 +1,7 @@
+musicflow_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: /storage/musicflow.duckdb
+      threads: 4
