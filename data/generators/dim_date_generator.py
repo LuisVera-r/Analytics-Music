@@ -1,10 +1,11 @@
-from datetime import datetime, timedelta, date
+from datetime import timedelta, date
 
 def generate_dim_date(conn):
   
+  days = 365 * 4
   dates = []
   start = date(2022, 1, 1)
-  for i in range(365 * 4):  # 4 años de fechas
+  for i in range(days):  
       d = start + timedelta(days=i)
       dates.append({
           'date_sk'    : int(d.strftime('%Y%m%d')), #Convierte la fecha a un número sin guiones
@@ -20,12 +21,24 @@ def generate_dim_date(conn):
           'is_holiday' : False
       })
   
-  conn.executemany("""
-  INSERT INTO dim_date VALUES (
-      ?, ?, ?, ?, ?,
-      ?, ?, ?, ?, ?, ?
-  )
-  """, [list(d.values()) for d in dates]) #List Comprehension
+  conn.executemany(
+    """
+    INSERT INTO dim_date (
+        date_sk,
+        ull_date,
+        day,
+        month,
+        month_name,
+        quarter,
+        year,
+        week,
+        day_of_week,
+        is_weekend,
+        is_holiday
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    )
+    """, [list(d.values()) for d in dates]) #List Comprehension
   
   print(f" dim_date: {len(dates)} fechas cargadas")
   
