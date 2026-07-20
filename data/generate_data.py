@@ -13,6 +13,7 @@ TABLES = (
     "dim_track",
     "dim_user",
     "fact_streams",
+    "stg_streams"
 )
 
 def create_tables(conn: duckdb.DuckDBPyConnection) -> None: 
