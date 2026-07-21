@@ -12,3 +12,4 @@ FROM {{ source('musicflow', 'fact_streams') }}
 WHERE listened_seconds > 0      -- filtra streams inválidos
   AND user_sk IS NOT NULL
   AND track_sk IS NOT NULL
+  AND date_sk IS NOT NULL  
