@@ -5,3 +5,4 @@ faker==37.5.3
 numpy==2.0.2
 pytest
 dbt-duckdb
+dagster dagster-webserver

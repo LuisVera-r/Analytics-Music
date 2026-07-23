@@ -26,8 +26,7 @@ airflow/webserver_config.py
 target/
 dbt_packages/
 logs/
-
-
+musicflow_dbt/target/
 
 
 
