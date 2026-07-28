@@ -3,7 +3,7 @@ __pycache__/
 logs/
 storage/*.duckdb
 .env
-venv/
+.venv/
 
 # ==========================================
 # Apache Airflow
