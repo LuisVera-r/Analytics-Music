@@ -14,14 +14,16 @@ WITH streams_enriched AS (
     FROM {{ ref('stg_streams') }} s
     JOIN {{ source('musicflow', 'dim_track') }} t 
         ON s.track_sk = t.track_sk
-    -- JOIN SCD-2 Point-in-Time: Unimos el stream con el usuario que era vigente EN ESE MOMENTO
+    -- Point-in-Time Join SCD-2 corregido
     JOIN {{ source('musicflow', 'dim_user') }} u 
         ON s.user_sk = u.user_sk 
-        AND s.date_sk >= u.valid_from_sk  -- Asumiendo que tienes date_sk en dim_user
-        AND s.date_sk <= u.valid_to_sk    -- Si usas fechas reales, usa s.date = u.valid_from, etc.
+        -- Convertimos valid_from (DATE) a integer (YYYYMMDD) para comparar con date_sk
+        AND s.date_sk >= CAST(STRFTIME(u.valid_from, '%Y%m%d') AS INTEGER)
+        -- Manejamos el valid_to (si es NULL o fecha futura, usamos 99991231)
+        AND s.date_sk <= CAST(STRFTIME(COALESCE(u.valid_to, '9999-12-31'), '%Y%m%d') AS INTEGER)
+        
     JOIN {{ source('musicflow', 'dim_date') }} d 
         ON s.date_sk = d.date_sk
-    -- QUITAMOS EL WHERE is_current = TRUE para no distorsionar la historia regional
 ),
 
 artist_hours AS (

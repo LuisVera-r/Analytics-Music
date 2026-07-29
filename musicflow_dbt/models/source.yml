@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: musicflow
+    schema: main
+    tables:
+      - name: fact_streams
+        description: "Tabla de hechos raw de reproducciones"
+      - name: dim_user
+      - name: dim_track
+      - name: dim_artist
+      - name: dim_date
