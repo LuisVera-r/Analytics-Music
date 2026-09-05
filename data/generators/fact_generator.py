@@ -97,28 +97,40 @@ def generate_fact_streams(conn, users, tracks):
 
 def generate_incremental_streams(users, tracks, start_date, end_date, last_stream_sk, num_streams):
     batch = []
-    
-    # Airflow pasa objetos timestamp, Faker necesita objetos date para date_between
-    # Nos aseguramos de extraer solo la fecha (YYYY-MM-DD)
-    start_dt = start_date if isinstance(start_date, datetime) else datetime.fromisoformat(str(start_date))
-    end_dt = end_date if isinstance(end_date, datetime) else datetime.fromisoformat(str(end_date))
 
-    for stream_sk in range(last_stream_sk + 1, last_stream_sk + num_streams + 1):
+    # Airflow entrega Pendulum DateTime.
+    # Lo convertimos a datetime si es necesario.
+    if not isinstance(start_date, datetime):
+        start_date = datetime.fromisoformat(str(start_date))
+
+    if not isinstance(end_date, datetime):
+        end_date = datetime.fromisoformat(str(end_date))
+
+    # La ejecución representa UNA hora.
+    # Como el DW solo almacena date_sk,
+    # usamos el día correspondiente al intervalo.
+    stream_date = start_date.date()
+    stream_date_sk = int(stream_date.strftime("%Y%m%d"))
+
+    for stream_sk in range(
+        last_stream_sk + 1,
+        last_stream_sk + num_streams + 1,
+    ):
+
         user = random.choice(users)
         track = random.choice(tracks)
-        
-        # Generamos la fecha DENTRO de la ventana horaria de esta ejecución
-        stream_date = fake.date_between(start_date=start_dt.date(), end_date=end_dt.date())
-        
-        batch.append({
-            "stream_sk": stream_sk,
-            "user_sk": user[0],
-            "track_sk": track[0],
-            "date_sk": int(stream_date.strftime("%Y%m%d")),
-            "listened_seconds": random.randint(30, track[5]),
-            "play_count": 1,
-            "was_skipped": random.random() < 0.25,
-            "device_type": random.choice(DEVICES)
-        })
+
+        batch.append(
+            {
+                "stream_sk": stream_sk,
+                "user_sk": user[0],
+                "track_sk": track[0],
+                "date_sk": stream_date_sk,
+                "listened_seconds": random.randint(30, track[5]),
+                "play_count": 1,
+                "was_skipped": random.random() < 0.25,
+                "device_type": random.choice(DEVICES),
+            }
+        )
 
     return batch

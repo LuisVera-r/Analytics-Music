@@ -3,7 +3,7 @@ __pycache__/
 logs/
 storage/*.duckdb
 .env
-venv/
+.venv/
 
 # ==========================================
 # Apache Airflow
@@ -26,8 +26,7 @@ airflow/webserver_config.py
 target/
 dbt_packages/
 logs/
-
-
+musicflow_dbt/target/
 
 
 

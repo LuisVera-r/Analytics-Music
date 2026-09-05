@@ -1,0 +1,31 @@
+version: 2
+
+models:
+
+  - name: mart_top_artists
+    description: "Reporte analítico final: Top de artistas por horas escuchadas a nivel semanal y regional."
+    columns:
+      - name: artist_name
+        description: "Nombre oficial del artista."
+        tests:
+          - not_null
+      - name: region
+        description: "Región o país del usuario al momento del stream."
+        tests:
+          - not_null
+      - name: week
+        description: "Semana del año."
+        tests:
+          - not_null
+      - name: year
+        description: "Año de la reproducción."
+        tests:
+          - not_null
+      - name: total_hours
+        description: "Suma total de horas escuchadas en esa semana y región."
+        tests:
+          - not_null
+      - name: ranking
+        description: "Posición del artista en el ranking semanal de su región (1 es el más escuchado)."
+        tests:
+          - not_null

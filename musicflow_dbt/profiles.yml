@@ -3,5 +3,5 @@ musicflow_dbt:
   outputs:
     dev:
       type: duckdb
-      path: /storage/musicflow.duckdb
+      path: /workspaces/Analytics-Music/storage/musicflow.duckdb
       threads: 4

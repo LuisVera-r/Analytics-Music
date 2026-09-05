@@ -1,11 +1,11 @@
 from pathlib import Path
 import duckdb 
 import traceback
-from generators.dim_artist_generator import generate_dim_artist
-from generators.dim_date_generator import  generate_dim_date
-from generators.dim_user_generator import generate_dim_user
-from generators.dim_track_generator import generate_dim_track
-from generators.fact_generator import generate_fact_streams
+from data.generators.dim_artist_generator import generate_dim_artist
+from data.generators.dim_date_generator import  generate_dim_date
+from data.generators.dim_user_generator import generate_dim_user
+from data.generators.dim_track_generator import generate_dim_track
+from data.generators.fact_generator import generate_fact_streams
 
 TABLES = (
      "dim_date",

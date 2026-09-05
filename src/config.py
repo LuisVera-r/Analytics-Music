@@ -1,6 +1,7 @@
 from pathlib import Path
 from datetime import datetime
 
+
 # ==========================
 # Rutas del proyecto
 # ==========================
@@ -33,3 +34,13 @@ STREAMS_PER_HOUR = int(WEEKLY_STREAMS / 168)
 # ==========================
 
 MAX_ROWS_ALLOWED = 1_000_000
+
+
+#******Conexion a Duckdb************
+
+import duckdb
+
+def get_duckdb_conn():
+    """Devuelve una conexión segura a DuckDB. 
+    Recuerda llamar a conn.close() al terminar."""
+    return duckdb.connect(str(DB_PATH))

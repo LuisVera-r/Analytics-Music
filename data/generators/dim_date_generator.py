@@ -25,7 +25,7 @@ def generate_dim_date(conn):
     """
     INSERT INTO dim_date (
         date_sk,
-        ull_date,
+        full_date,
         day,
         month,
         month_name,
@@ -37,7 +37,7 @@ def generate_dim_date(conn):
         is_holiday
     )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    )
+    
     """, [list(d.values()) for d in dates]) #List Comprehension
   
   print(f" dim_date: {len(dates)} fechas cargadas")

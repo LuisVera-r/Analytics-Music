@@ -1,0 +1,16 @@
+models:
+  - name: stg_streams
+    description: "Streams limpios y estandarizados"
+    columns:
+      - name: stream_sk
+        tests:
+          - unique
+          - not_null
+      - name: listened_seconds
+        tests:
+          - not_null
+      - name: device_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['mobile', 'desktop', 'tablet', 'smart_tv']
